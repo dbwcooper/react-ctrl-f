@@ -1,6 +1,7 @@
 {
   "name": "blog",
   "version": "0.0.0",
+  "description": "博客demo By dbcookie",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
