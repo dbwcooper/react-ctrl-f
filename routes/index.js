@@ -9,6 +9,10 @@ module.exports = function (app) {
     app.use('/signout', require('./signout'));
     app.use('/posts', require('./posts'));
     // 404 page 如果之前的路径都没有的话 就会执行这个
+
+    app.use('https*',function (req,res) {
+       res.redirect(req.path);
+    });
     app.use(function (req,res) {
         // console.log(req.path);
         // console.log(res.headersSent);
