@@ -95,7 +95,8 @@ router.get('/:postId', function (req, res, next) {
 //更新文章页
 router.get('/:postId/edit', checkLogin, function (req, res, next) {
     var postId = req.params.postId;
-    var author = req.sessoin.user._id;
+
+    var author = req.session.user._id;
     PostModel.getRawPostById(postId)
         .then(function (post) {
             if (!post) {
@@ -170,5 +171,6 @@ router.get('/:postId/comment/:commentId/remove', checkLogin, function (req, res,
         })
         .catch(next);
 });
+
 
 module.exports = router;

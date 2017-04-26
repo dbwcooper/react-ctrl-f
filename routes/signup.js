@@ -29,8 +29,8 @@ router.post('/',checkNotLogin,function (req,res,next) {
     var gender = req.fields.gender;
     var bio = req.fields.bio;
     var avatar = req.files.avatar.path.split(path.sep).pop();
-    console.log("avatar="+avatar);
-    console.log("avatar_path="+req.files.avatar.path);
+    // console.log("avatar="+avatar);
+    // console.log("avatar_path="+req.files.avatar.path);
     var password = req.fields.password;
     var repassword = req.fields.repassword;
 
@@ -76,7 +76,7 @@ router.post('/',checkNotLogin,function (req,res,next) {
         .then(function (result) {
         //  此 user 是插入mongodb 之后的值，包含 _id ,result是插入数据的完整数据
             user = result.ops[0];
-            console.log(result.ops[0]);
+            // console.log(result.ops[0]);
         //    将信息存入session 但是要删掉密码
             delete user.password;
             req.session.user = user;

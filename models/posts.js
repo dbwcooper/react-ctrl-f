@@ -84,8 +84,8 @@ module.exports = {
             .exec();
     },
 //    通过用户id和文章id更新一篇文章
-    updatePostById: function update(postId, author) {
-        return posts.update({author: author, _id: postId}, {$set: data}).exec();
+    updatePostById: function update(postId, author,content) {
+        return posts.update({author: author, _id: postId}, {$set: content}).exec();
     },
 
 //    通过用户id和文章 id 删除一篇文章
