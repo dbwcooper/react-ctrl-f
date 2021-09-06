@@ -1,5 +1,3 @@
-import Demo1 from './components/chapter1';
-import Demo2 from './components/chapter2';
-import Demo4 from './components/chapter4';
+import Home from './pages/Home';
 
-export default Demo4;
+export default Home;
