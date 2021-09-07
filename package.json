@@ -1,10 +1,37 @@
 {
   "name": "react-ctrl-f",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "Ctrl + f function realized by react",
+  "license": "MIT",
+  "title": "React Ctrl F",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbwcooper/react-ctrl-f.gitß"
+  },
+  "author": {
+    "name": "dbwcooper",
+    "email": "dbwencookie@gmail.com",
+    "url": "https://github.com/dbwcooper"
+  },
+  "files": [
+    "lib"
+  ],
+  "homepage": "https://react-ctrl-f.vercel.app",
+  "main": "lib/index.js",
+  "module": "lib/esm/index.js",
+  "keywords": [
+    "React",
+    "ctrl f",
+    "web",
+    "search",
+    "match text",
+    "scrollToView"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "build:tsup": "tsup src/components/index.ts "
   },
   "dependencies": {
     "react": "^17.0.0",
@@ -14,7 +41,11 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@vitejs/plugin-react-refresh": "^1.1.0",
+    "tsup": "^4.14.0",
     "typescript": "^4.1.2",
     "vite": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { MatchText, SearchProvider } from '../components';
+import { MatchText, SearchProvider } from '../../lib';
 import Search from './Search';
 
 export default function App() {
@@ -38,6 +37,7 @@ export default function App() {
           React.
         </MatchText>
       </p>
+      {/* <Test/> */}
       <p
         style={{
           minHeight: 200,

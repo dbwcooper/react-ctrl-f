@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SearchContext, SearchEventContext } from '../components';
+import { SearchContext, SearchEventContext } from '../../lib';
 
 export const SearchComponent = () => {
   const { searchValue, activeCount, totalCount } = useContext(SearchContext);

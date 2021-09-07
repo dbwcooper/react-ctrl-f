@@ -12,14 +12,13 @@ import {
   IState,
   IActions,
   IActionTypes,
-} from './Types';
+} from './Types.d';
 
 export const scrollToView = (id: string, fixHeaderHeight: number = 0) => {
   const dom = document.getElementById(id);
   if (dom) {
     const topOfElement =
       dom.getBoundingClientRect().bottom + window.pageYOffset - fixHeaderHeight;
-    console.log('topOfElement', topOfElement)
     window.scroll({
       top: topOfElement,
       behavior: 'smooth',
