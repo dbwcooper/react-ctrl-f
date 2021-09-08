@@ -1,3 +1,5 @@
+[English](./README.md)
+
 # react-ctrl-f
 
 一个使用 `React` 实现网页版 `ctrl + f` 功能的库
@@ -83,11 +85,11 @@ import {
         </div>
         <p>
           <MatchText id='match-1'>
-            React components implement a render() method that takes input data and
-            returns what to display. This example uses an XML-like syntax called
-            JSX. Input data that is passed into the component can be accessed by
-            render() via this.props. JSX is optional and not required to use
-            React.
+            React components implement a render() method that takes input data
+            and returns what to display. This example uses an XML-like syntax
+            called JSX. Input data that is passed into the component can be
+            accessed by render() via this.props. JSX is optional and not
+            required to use React.
           </MatchText>
         </p>
       </SearchProvider>
