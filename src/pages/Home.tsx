@@ -1,5 +1,5 @@
 import React from 'react';
-import { MatchText, SearchProvider } from '../../lib';
+import { MatchText, SearchProvider } from 'react-ctrl-f';
 import Search from './Search';
 
 export default function App() {

@@ -14,8 +14,8 @@ export interface MatchObjectProps {
 export interface IState {
   searchValue: string;
   totalCount: number;
-  activeCount: number; // 当前选中 count, 小于等于 totalCount
-  activeId: string; // 当前选中的 文本 对应的 id
+  activeCount: number;
+  activeId: string;
   matchedList: MatchObjectProps[];
 }
 

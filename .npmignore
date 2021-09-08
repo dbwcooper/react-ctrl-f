@@ -7,3 +7,4 @@ dist-ssr
 .github
 index.html
 vite.config.ts
+yarn.lock

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { SearchContext, SearchEventContext } from '../../lib';
+import { SearchContext, SearchEventContext } from 'react-ctrl-f';
 
 export const SearchComponent = () => {
   const { searchValue, activeCount, totalCount } = useContext(SearchContext);
   const { onSearchChange, onPrev, onNext } = useContext(SearchEventContext);
   return (
-    <div className='snx-padding-2'>
+    <div style={{ padding: 16 }}>
       <input
         style={{ width: 200, marginRight: '12px', height: '24px' }}
         value={searchValue}
