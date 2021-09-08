@@ -95,4 +95,7 @@ export default function App() {
 }
 ```
 
+1. - [ ] `MatchText` support `React` component
+2. - [ ] use [scroll-into-view-if-needed](https://github.com/stipsan/scroll-into-view-if-needed) replace scroll function
+
 more details see `src/pages/Home.tsx` and `src/pages/Search.tsx`
