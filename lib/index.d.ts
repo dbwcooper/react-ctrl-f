@@ -8,17 +8,18 @@ interface MatchObjectProps {
 interface IState {
   searchValue: string;
   totalCount: number;
-  activeCount: number; // 当前选中 count, 小于等于 totalCount
-  activeId: string; // 当前选中的 文本 对应的 id
+  activeCount: number;
+  activeId: string;
   matchedList: MatchObjectProps[];
+  ignorecase?: boolean;
 }
 
 interface EventContextProps {
   onSearchChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onNext: (fixHeaderHeight: number) => void;
-  onPrev: (fixHeaderHeight: number) => void;
+  onNext: (data: any) => void;
+  onPrev: (data: any) => void;
   onUpdateMatchList: (matchedList: MatchObjectProps[]) => void;
 }
 
@@ -26,13 +27,21 @@ interface MatchTextProps {
   id: string;
   text?: string;
   children?: React.ReactChild;
+  ignorecase?: boolean;
+}
+
+interface SearchProviderProps {
+  children: React.ReactNode;
+  value?: {
+    fixedHeaderHeight?: number;
+    onScroll?: (id: string, fixedHeight?: number) => void;
+    ignorecase?: boolean;
+  };
 }
 
 declare const SearchContext: React.Context<IState>;
 declare const SearchEventContext: React.Context<EventContextProps>;
-declare const SearchProvider: (props: {
-    children: React.ReactNode;
-}) => JSX.Element;
+declare const SearchProvider: (props: SearchProviderProps) => JSX.Element;
 
 declare const MatchText: (data: MatchTextProps) => React.ReactElement<string>;
 
