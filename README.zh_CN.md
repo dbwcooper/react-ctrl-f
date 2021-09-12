@@ -19,7 +19,10 @@ import {
 
 ### MatchText
 
-- 用来包裹需要匹配的文本，需要设置一个唯一的 id
+- `id` 是必须的, 你需要设置一个唯一的 id
+- `ignorecase` 是可选项，默认是 `true`
+
+- 示例：
   ```jsx
   <MatchText id='match-text-id-1'>Hello world</MatchText>
   ```
@@ -41,7 +44,14 @@ import {
 
 ### SearchProvider
 
-- SearchContext 的 Provider, 需要使用 SearchProvider 包裹 Search 和 MatchText 组件。
+`SearchContext` 的 Provider, 需要使用 `SearchProvider` 包裹 `Search` 和 `MatchText` 组件。
+
+- `value` 是可选项
+
+  - `value.fixedHeaderHeight` 是可选项, 类型是 `number`
+  - `value.onScroll` 是可选项，传入一个自定义的函数
+
+- 示例：
 
   ```jsx
   import React from 'react';
@@ -97,4 +107,4 @@ import {
   }
   ```
 
-more details see `src/pages/Home.tsx` and `src/pages/Search.tsx`
+查看演示例子 `src/pages/Home.tsx` and `src/pages/Search.tsx`

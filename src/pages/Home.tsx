@@ -1,10 +1,28 @@
-import React from 'react';
-import { MatchText, SearchProvider } from 'react-ctrl-f';
+import React, { useCallback } from 'react';
+import { MatchText, SearchProvider } from '../components';
 import Search from './Search';
 
 export default function App() {
+  const onCustomScroll = useCallback((id, fixedHeaderHeight) => {
+    const dom = document.getElementById(id);
+    if (dom) {
+      const topOfElement =
+        dom.getBoundingClientRect().bottom +
+        window.pageYOffset -
+        fixedHeaderHeight;
+      window.scroll({
+        top: topOfElement,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
   return (
-    <SearchProvider>
+    <SearchProvider
+      value={{
+        fixedHeaderHeight: 90,
+        onScroll: onCustomScroll,
+      }}
+    >
       <div
         style={{
           position: 'fixed',
@@ -29,7 +47,7 @@ export default function App() {
           margin: '100px 40px',
         }}
       >
-        <MatchText id='match-1'>
+        <MatchText id='match-1' ignorecase={false}>
           React components implement a render() method that takes input data and
           returns what to display. This example uses an XML-like syntax called
           JSX. Input data that is passed into the component can be accessed by
@@ -37,7 +55,6 @@ export default function App() {
           React.
         </MatchText>
       </p>
-      {/* <Test/> */}
       <p
         style={{
           minHeight: 200,

@@ -13,7 +13,11 @@ function getMatchId(prefixId: string, index: number) {
   return `${prefixId}_${index}`;
 }
 
-function getMatchText(keyword: string, text: string) {
+function getMatchText(
+  keyword: string,
+  text: string,
+  ignorecase: boolean = true
+) {
   let keywordStr = keyword;
   let textStr = text;
   if (typeof keyword === 'number') {
@@ -31,7 +35,7 @@ function getMatchText(keyword: string, text: string) {
   ) {
     return text;
   }
-  const regexp = new RegExp(escapeStr(keywordStr), 'gi');
+  const regexp = new RegExp(escapeStr(keywordStr), ignorecase ? 'gi' : 'g');
   const matches: string[] = []; // save matched string, we will use this to overwrite keywordStr in the result string
   const textWithMark = textStr.replace(regexp, (match) => {
     matches.push(match);
@@ -55,12 +59,16 @@ export const MatchText = (data: MatchTextProps): React.ReactElement<string> => {
     return <>{textStr}</>;
   }
 
-  const { searchValue, activeId } = useContext(SearchContext);
+  let { searchValue, activeId, ignorecase } = useContext(SearchContext);
   const { onUpdateMatchList } = useContext(SearchEventContext);
+  ignorecase =
+    typeof data.ignorecase === 'boolean' ? data.ignorecase : ignorecase;
+
   const matchData = useMemo(
-    () => getMatchText(searchValue, textStr),
+    () => getMatchText(searchValue, textStr, ignorecase),
     [searchValue]
   );
+
   useLayoutEffect(() => {
     if (typeof matchData === 'object') {
       const matchIds = matchData.matches.map((_, index) => ({

@@ -12,9 +12,10 @@ import {
   IState,
   IActions,
   IActionTypes,
+  SearchProviderProps,
 } from './Types.d';
 
-export const scrollToView = (id: string, fixHeaderHeight: number = 0) => {
+const scrollToView = (id: string, fixHeaderHeight: number = 0) => {
   const dom = document.getElementById(id);
   if (dom) {
     const topOfElement =
@@ -36,16 +37,11 @@ const defaultStore: IState = {
 };
 
 const searchEventStore: EventContextProps = {
-  onSearchChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {},
+  onSearchChange: () => {},
   onPrev: () => {},
   onNext: () => {},
-  onUpdateMatchList: (initialList: MatchObjectProps[]) => {},
+  onUpdateMatchList: () => {},
 };
-
-export const SearchContext = createContext(defaultStore);
-export const SearchEventContext = createContext(searchEventStore);
 
 const reducer = (state: IState, action: IActions): IState => {
   if (action.type === IActionTypes.setSearchValue) {
@@ -71,7 +67,10 @@ const reducer = (state: IState, action: IActions): IState => {
   return state;
 };
 
-export const SearchProvider = (props: { children: React.ReactNode }) => {
+export const SearchContext = createContext(defaultStore);
+export const SearchEventContext = createContext(searchEventStore);
+
+export const SearchProvider = (props: SearchProviderProps) => {
   const [store, dispatch] = useReducer(reducer, defaultStore);
 
   const activeCount = store.activeCount;
@@ -83,7 +82,7 @@ export const SearchProvider = (props: { children: React.ReactNode }) => {
 
   // Calculate previous match text
   const onPrev = useCallback(
-    (fixedHeight) => {
+    (fixedHeaderHeight) => {
       if (activeCount > 0) {
         let prevActiveCount =
           activeCount - 1 < 1 ? store.matchedList.length : activeCount - 1;
@@ -93,7 +92,16 @@ export const SearchProvider = (props: { children: React.ReactNode }) => {
           type: IActionTypes.setActiveMatch,
           payload: { activeId: prevActiveId, activeCount: prevActiveCount },
         });
-        scrollToView(prevActiveId, fixedHeight);
+
+        // scroll To View
+        if (typeof fixedHeaderHeight !== 'number') {
+          fixedHeaderHeight = props.value?.fixedHeaderHeight;
+        }
+        if (typeof props.value?.onScroll === 'function') {
+          props.value?.onScroll(prevActiveId, fixedHeaderHeight);
+        } else {
+          scrollToView(prevActiveId, fixedHeaderHeight);
+        }
       }
     },
     [activeCount, totalCount]
@@ -101,8 +109,9 @@ export const SearchProvider = (props: { children: React.ReactNode }) => {
 
   // Calculate next match text
   const onNext = useCallback(
-    (fixedHeight) => {
+    (fixedHeaderHeight) => {
       if (activeCount > 0) {
+        // update active count
         let nextActiveCount =
           activeCount + 1 > store.matchedList.length ? 1 : activeCount + 1;
         let matchIndex = nextActiveCount - 1;
@@ -111,18 +120,27 @@ export const SearchProvider = (props: { children: React.ReactNode }) => {
           type: IActionTypes.setActiveMatch,
           payload: { activeId: nextActiveId, activeCount: nextActiveCount },
         });
-        scrollToView(nextActiveId, fixedHeight);
+
+        // scroll To View
+        if (typeof fixedHeaderHeight !== 'number') {
+          fixedHeaderHeight = props.value?.fixedHeaderHeight;
+        }
+        if (typeof props.value?.onScroll === 'function') {
+          props.value?.onScroll(nextActiveId, fixedHeaderHeight);
+        } else {
+          scrollToView(nextActiveId, fixedHeaderHeight);
+        }
       }
     },
     [activeCount, totalCount]
   );
 
   const onUpdateMatchList = useMemo(
-    (initialList: MatchObjectProps[] = []) =>
+    (cacheList: MatchObjectProps[] = []) =>
       (matchList: MatchObjectProps[] = []) => {
         // cache initialList
-        initialList = initialList.concat(matchList);
-        dispatch({ type: IActionTypes.setMatchList, payload: initialList });
+        cacheList = cacheList.concat(matchList);
+        dispatch({ type: IActionTypes.setMatchList, payload: cacheList });
       },
     [store.searchValue]
   );
@@ -139,11 +157,13 @@ export const SearchProvider = (props: { children: React.ReactNode }) => {
       });
     }
   }, [store.matchedList]);
+
   return (
     <SearchContext.Provider
       value={{
         ...store,
         totalCount,
+        ignorecase: props.value?.ignorecase,
       }}
     >
       <SearchEventContext.Provider

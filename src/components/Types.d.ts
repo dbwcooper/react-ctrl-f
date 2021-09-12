@@ -17,14 +17,15 @@ export interface IState {
   activeCount: number;
   activeId: string;
   matchedList: MatchObjectProps[];
+  ignorecase?: boolean;
 }
 
 export interface EventContextProps {
   onSearchChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onNext: (fixHeaderHeight: number) => void;
-  onPrev: (fixHeaderHeight: number) => void;
+  onNext: (data: any) => void;
+  onPrev: (data: any) => void;
   onUpdateMatchList: (matchedList: MatchObjectProps[]) => void;
 }
 
@@ -53,4 +54,14 @@ export interface MatchTextProps {
   id: string;
   text?: string;
   children?: React.ReactChild;
+  ignorecase?: boolean;
+}
+
+export interface SearchProviderProps {
+  children: React.ReactNode;
+  value?: {
+    fixedHeaderHeight?: number;
+    onScroll?: (id: string, fixedHeight?: number) => void;
+    ignorecase?: boolean;
+  };
 }

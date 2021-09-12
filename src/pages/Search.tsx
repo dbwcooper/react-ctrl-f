@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SearchContext, SearchEventContext } from 'react-ctrl-f';
+import { SearchContext, SearchEventContext } from '../components';
 
 export const SearchComponent = () => {
   const { searchValue, activeCount, totalCount } = useContext(SearchContext);
@@ -11,7 +11,7 @@ export const SearchComponent = () => {
         value={searchValue}
         onChange={onSearchChange}
       />
-      <button style={{ height: '28px' }} title='Up' onClick={() => onPrev(100)}>
+      <button style={{ height: '28px' }} title='Up' onClick={onPrev}>
         Prev
       </button>
       <span style={{ padding: '0px 12px' }}>
@@ -20,7 +20,7 @@ export const SearchComponent = () => {
       <button
         style={{ height: '28px' }}
         title='Down'
-        onClick={() => onNext(100)}
+        onClick={onNext}
       >
         Next
       </button>
