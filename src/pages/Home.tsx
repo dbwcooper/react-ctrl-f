@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { MatchText, SearchProvider } from '../components';
+import { MatchText, SearchProvider } from 'react-ctrl-f';
 import Search from './Search';
 
 export default function App() {

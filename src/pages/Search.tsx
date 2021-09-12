@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SearchContext, SearchEventContext } from '../components';
+import { SearchContext, SearchEventContext } from 'react-ctrl-f';
 
 export const SearchComponent = () => {
   const { searchValue, activeCount, totalCount } = useContext(SearchContext);
@@ -17,11 +17,7 @@ export const SearchComponent = () => {
       <span style={{ padding: '0px 12px' }}>
         {activeCount}/{totalCount}
       </span>
-      <button
-        style={{ height: '28px' }}
-        title='Down'
-        onClick={onNext}
-      >
+      <button style={{ height: '28px' }} title='Down' onClick={onNext}>
         Next
       </button>
     </div>

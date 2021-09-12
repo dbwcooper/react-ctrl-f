@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "react": "^17.0.0",
-    "react-ctrl-f": "^0.0.2",
+    "react-ctrl-f": "^0.0.3",
     "react-dom": "^17.0.0"
   },
   "devDependencies": {
