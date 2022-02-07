@@ -66,7 +66,7 @@ export const MatchText = (data: MatchTextProps): React.ReactElement<string> => {
 
   const matchData = useMemo(
     () => getMatchText(searchValue, textStr, ignorecase),
-    [searchValue]
+    [searchValue, textStr]
   );
 
   useLayoutEffect(() => {
