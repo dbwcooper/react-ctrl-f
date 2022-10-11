@@ -55,6 +55,8 @@ export interface MatchTextProps {
   text?: string;
   children?: React.ReactChild;
   ignorecase?: boolean;
+  matchColor?: string;
+  activeColor?: string;
 }
 
 export interface SearchProviderProps {
