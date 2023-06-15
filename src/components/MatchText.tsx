@@ -13,6 +13,12 @@ function getMatchId(prefixId: string, index: number) {
   return `${prefixId}_${index}`;
 }
 
+function isValidColor(color: string) {
+  const style = new Option().style;
+  style.color = color;
+  return (style.color !== '' && color !== 'unset' && color !== 'initial' && color !== 'inherit')
+}
+
 function getMatchText(
   keyword: string,
   text: string,
@@ -52,6 +58,9 @@ function getMatchText(
 export const MatchText = (data: MatchTextProps): React.ReactElement<string> => {
   let textStr = data.text!;
   const id = data.id;
+  const activeColor = isValidColor(data.activeColor || '') ? data.activeColor : '#ff9632';
+  const matchColor = isValidColor(data.matchColor || '') ? data.matchColor : '#ffff00';
+
   if (typeof data.children === 'string') {
     textStr = data.children;
   }
@@ -90,7 +99,8 @@ export const MatchText = (data: MatchTextProps): React.ReactElement<string> => {
           return slice;
         }
         const matchId = getMatchId(id, index);
-        const color = matchId === activeId ? '#ff9632' : '#ffff00';
+        const color = matchId === activeId ? activeColor : matchColor;
+
         const matchStr = matchData.matches[index];
         return (
           <React.Fragment key={index}>
